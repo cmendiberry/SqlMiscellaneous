@@ -1,0 +1,8 @@
+SELECT sj.name, 
+ sja.run_requested_date, 
+ CONVERT(VARCHAR(12), sja.stop_execution_date-sja.start_execution_date, 114) Duration
+FROM msdb.dbo.sysjobactivity sja
+INNER JOIN msdb.dbo.sysjobs sj
+ON sja.job_id = sj.job_id
+WHERE sja.run_requested_date IS NOT NULL
+ORDER BY sja.run_requested_date desc;
